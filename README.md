@@ -8,7 +8,7 @@ Book Haven API is a Node.js and Express-based backend for an online bookstore. I
 - **CRUD Operations** for Users, Books, Orders, and Reviews
 - **MongoDB with Mongoose**
 - **Swagger API Documentation**
-- **Security** with Helmet, CORS, and Express-Validator
+- **Security** with REST Client, CORS, and Express-Validator
 
 ## 📂 Technologies Used
 
@@ -16,7 +16,7 @@ Book Haven API is a Node.js and Express-based backend for an online bookstore. I
 - **Database:** MongoDB, Mongoose
 - **Authentication:** Passport.js (GitHub OAuth)
 - **API Documentation:** Swagger
-- **Security:** Helmet.js, Express-Validator
+- **Security:** Express-Validator
 
 ## 📡 Setup & Installation
 
