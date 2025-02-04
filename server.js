@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
+import session from 'express-session';
 import { initDb } from './config/database.js';
 import bodyParser from 'body-parser';
 import router from './routes/index.js';
