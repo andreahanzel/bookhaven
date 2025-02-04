@@ -1,0 +1,109 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BookHaven API",
+    "description": "API for managing books in the BookHaven store",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/books": {
+      "get": {
+        "tags": ["Books"],
+        "description": "Retrieve all books",
+        "produces": ["application/json"],
+        "responses": {
+          "200": { "description": "OK" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "post": {
+        "tags": ["Books"],
+        "description": "Create a new book",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bookId": { "type": "string", "example": "B001" },
+                "title": { "type": "string", "example": "The Great Gatsby" },
+                "author": { "type": "string", "example": "F. Scott Fitzgerald" },
+                "genre": { "type": "string", "example": "Fiction" },
+                "price": { "type": "number", "example": 10.99 },
+                "stock": { "type": "integer", "example": 25 },
+                "publishedYear": { "type": "integer", "example": 1925 }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Book created successfully" },
+          "400": { "description": "Bad Request - Invalid Input" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "tags": ["Books"],
+        "description": "Retrieve a book by ID",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "OK" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Book Not Found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "put": {
+        "tags": ["Books"],
+        "description": "Update a book by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bookId": { "type": "string", "example": "B001" },
+                "title": { "type": "string", "example": "The Great Gatsby" },
+                "author": { "type": "string", "example": "F. Scott Fitzgerald" },
+                "genre": { "type": "string", "example": "Fiction" },
+                "price": { "type": "number", "example": 10.99 },
+                "stock": { "type": "integer", "example": 25 },
+                "publishedYear": { "type": "integer", "example": 1925 }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Book updated successfully" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Book Not Found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      },
+      "delete": {
+        "tags": ["Books"],
+        "description": "Delete a book by ID",
+        "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+        "responses": {
+          "200": { "description": "Book deleted successfully" },
+          "400": { "description": "Bad Request" },
+          "404": { "description": "Book Not Found" },
+          "500": { "description": "Internal Server Error" }
+        }
+      }
+    }
+  }
+}

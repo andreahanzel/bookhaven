@@ -8,7 +8,7 @@ export const errorHandler = (err, req, res, _next) => {
       status: 'error',
       statusCode: err.statusCode,
       message: err.message
-    }); 
+    });
   }
 
   // If it's a MongoDB error
