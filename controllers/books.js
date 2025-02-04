@@ -1,4 +1,4 @@
-import { connectToDatabase } from '../config/database.js';
+import { connectToDatabase } from '../config/database.js'; // Import the database connection function
 import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
