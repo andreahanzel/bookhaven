@@ -1,0 +1,53 @@
+### 📚 Books API Tests
+
+### Get all books
+GET http://localhost:3000/books HTTP/1.1
+
+### Get a single book by ID
+GET http://localhost:3000/books/67a1238597f9f01aac2a9e58 HTTP/1.1
+
+### Create a new book
+POST http://localhost:3000/books/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "bookId": "B009",
+  "title": "1984",
+  "author": "George Orwell",
+  "genre": "Dystopian",
+  "price": 14.99,
+  "stock": 20,
+  "publishedYear": 1949
+}
+
+### Update a book
+PUT http://localhost:3000/books/[id] HTTP/1.1 // Replace [id] with the actual book ID
+Content-Type: application/json
+
+{
+  "bookId": "B0010", 
+  "title": "1984 - Updated Edition",
+  "author": "George Orwell",
+  "genre": "Dystopian",
+  "price": 16.99,
+  "stock": 25,
+  "publishedYear": 1949
+}
+
+### Delete a book
+DELETE http://localhost:3000/books/[id] HTTP/1.1 // Replace [id] with the actual book ID
+
+---
+
+### 🚨 Error Test Cases
+
+### Test Error: Get book with invalid ID format
+GET http://localhost:3000/books/123 HTTP/1.1
+
+### Test Error: Create book with missing required fields
+POST http://localhost:3000/books/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Test Book"
+}
