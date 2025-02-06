@@ -1,5 +1,6 @@
-import { body, validationResult } from 'express-validator'; // Validation rules for books
+import { body, validationResult } from 'express-validator'; 
 
+// Validation rules for books
 const bookValidationRules = () => [
   body('bookId')
     .trim()
@@ -47,6 +48,61 @@ const bookValidationRules = () => [
     .isInt({ min: 0 })
     .withMessage('Published year must be a non-negative integer')
 ]; // Validation rules for books
+
+//// Validation rules for users
+const userValidationRules = () => [
+  body('userId')
+    .trim()
+    .notEmpty()
+    .withMessage('User ID is required')
+    .isString()
+    .withMessage('User ID must be a string'),
+
+  body('firstName')
+    .trim()
+    .notEmpty()
+    .withMessage('First name is required')
+    .isString()
+    .withMessage('First name must be a string'),
+
+  body('lastName')
+    .trim()
+    .notEmpty()
+    .withMessage('Last name is required')
+    .isString()
+    .withMessage('Last name must be a string'),
+
+    body('email')
+    .notEmpty()
+    .withMessage('Email is required')
+    .isFloat({ gt: 0 })
+    .withMessage('Email must be a string'),
+
+    body('password')
+    .notEmpty()
+    .withMessage('Password is required')
+    .isFloat({ gt: 0 })
+    .withMessage('Password must be a string'),
+
+    body('role')
+    .notEmpty()
+    .withMessage('Role is required')
+    .isFloat({ gt: 0 })
+    .withMessage('Role must be a string'),
+
+    body('createdAt')
+    .notEmpty()
+    .withMessage('Creation date is required')
+    .isFloat({ gt: 0 })
+    .withMessage('Creation must be a string'),
+
+    body('address')
+    .notEmpty()
+    .withMessage('Address is required')
+    .isFloat({ gt: 0 })
+    .withMessage('Address must be a string')
+]; // Validation rules for users
+
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
