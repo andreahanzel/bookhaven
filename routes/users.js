@@ -88,7 +88,7 @@ router.post('/', userValidationRules(), validate, usersController.createUser);
  *       400:
  *         description: Invalid ID format
  *       404:
- *         description: Book not found
+ *         description: User not found
  *       500:
  *         description: Internal Server Error
  *   put:

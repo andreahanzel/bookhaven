@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
 // Define Mongoose schema and model for users
-const bookSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: [true, 'User ID is required']
@@ -34,7 +34,7 @@ const bookSchema = new mongoose.Schema({
   },
   address: {
     type: Number,
-    required: [true, 'Address year is required']
+    required: [true, 'Address is required']
   }
 });
 
@@ -51,7 +51,7 @@ const getAllUsers = async (req, res) => {
     res.status(200).json(users);
   } catch (err) {
     console.error('Error in getAllUsers:', err);
-    res.status(500).json({ message: 'Error fetching books', error: err.toString() });
+    res.status(500).json({ message: 'Error fetching users', error: err.toString() });
   }
 };
 
