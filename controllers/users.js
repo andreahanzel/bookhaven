@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb';
 import mongoose from 'mongoose';
 
 // Define Mongoose schema and model for users
-const bookSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: [true, 'User ID is required']
@@ -21,19 +21,19 @@ const bookSchema = new mongoose.Schema({
     required: [true, 'Email is required']
   },
   password: {
-    type: Number,
+    type: String,
     required: [true, 'Password is required']
   },
   role: {
-    type: Number,
+    type: String,
     required: [true, 'Role is required']
   },
   createdAt: {
-    type: Number,
+    type: String,
     required: [true, 'Created date is required']
   },
   address: {
-    type: Number,
+    type: String,
     required: [true, 'Address year is required']
   }
 });
@@ -132,7 +132,7 @@ const updateUser = async (req, res) => {
       return res.status(400).json({ message: 'Validation failed', error: validationError.message });
     }
 
-    const response = await collection.updateOne({ _id: bookId }, { $set: req.body });
+    const response = await collection.updateOne({ _id: userId }, { $set: req.body });
 
     if (response.matchedCount === 0) {
       return res.status(404).json({ message: 'User not found' });

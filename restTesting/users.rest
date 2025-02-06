@@ -4,7 +4,7 @@
 GET http://localhost:3000/users HTTP/1.1
 
 ### Get a single user by ID
-GET http://localhost:3000/users/67a1235d97f9f01aac2a9e51 HTTP/1.1
+GET http://localhost:3000/users/67a1235d97f9f01aac2a9e50 HTTP/1.1
 
 ### Create a new user
 POST http://localhost:3000/users/ HTTP/1.1
@@ -22,7 +22,7 @@ Content-Type: application/json
 }
 
 ### Update a user
-PUT http://localhost:3000/users/[id] HTTP/1.1 // Replace [id] with the actual user ID
+PUT http://localhost:3000/users/67a4b20030c50d83de65445c HTTP/1.1 // Replace [id] with the actual user ID
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ Content-Type: application/json
 }
 
 ### Delete a user
-DELETE http://localhost:3000/users/[id] HTTP/1.1 // Replace [id] with the actual user ID
+DELETE http://localhost:3000/users/67a4b20030c50d83de65445c HTTP/1.1 // Replace [id] with the actual user ID
 
 ---
 
