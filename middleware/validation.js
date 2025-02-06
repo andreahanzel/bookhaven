@@ -75,31 +75,31 @@ const userValidationRules = () => [
     body('email')
     .notEmpty()
     .withMessage('Email is required')
-    .isFloat({ gt: 0 })
+    .isString()
     .withMessage('Email must be a string'),
 
     body('password')
     .notEmpty()
     .withMessage('Password is required')
-    .isFloat({ gt: 0 })
+    .isString()
     .withMessage('Password must be a string'),
 
     body('role')
     .notEmpty()
     .withMessage('Role is required')
-    .isFloat({ gt: 0 })
+    .isString()
     .withMessage('Role must be a string'),
 
     body('createdAt')
     .notEmpty()
     .withMessage('Creation date is required')
-    .isFloat({ gt: 0 })
+    .isString()
     .withMessage('Creation must be a string'),
 
     body('address')
     .notEmpty()
     .withMessage('Address is required')
-    .isFloat({ gt: 0 })
+    .isString()
     .withMessage('Address must be a string')
 ]; // Validation rules for users
 
