@@ -35,6 +35,7 @@ const userSchema = new mongoose.Schema({
   address: {
     type: String,
     required: [true, 'Address is required']
+
   }
 });
 
