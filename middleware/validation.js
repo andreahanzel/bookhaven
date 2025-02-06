@@ -120,4 +120,4 @@ const validate = (req, res, next) => {
   });
 }; // Middleware to validate request data
 
-export { bookValidationRules, validate }; // Export validation rules and middleware
+export { bookValidationRules, userValidationRules, validate }; // Export validation rules and middleware

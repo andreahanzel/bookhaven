@@ -1,6 +1,6 @@
 import express from 'express'; // Main router for the application
 // import ordersRouter from './orders.js'; // Router for order-related routes
-// import usersRouter from './users.js'; // Router for user-related routes
+import usersRouter from './users.js'; // Router for user-related routes
 import booksRouter from './books.js'; // Router for order-related routes
 // import reviewsRouter from './reviews.js'; // Router for user-related routes
 import swaggerRouter from './swagger.js'; // Router for Swagger documentation
@@ -19,6 +19,8 @@ router.use('/', swaggerRouter);
 
 // Mount the books router at /books
 router.use('/books', booksRouter);
+// Mount the users router at /users
+router.use('/users', usersRouter);
 
 // Add GitHub authentication routes
 // router.get('/login', passport.authenticate('github'), (req, res) => {});
