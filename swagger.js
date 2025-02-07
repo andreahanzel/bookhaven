@@ -10,7 +10,7 @@ const doc = {
   },
   host: process.env.HOST || 'bookhaven-api-npvi.onrender.com',
   basePath: '/',
-  schemes: ['http', 'https']
+  schemes: ['https', 'http']
 }; //Swagger documentation configuration
 
 const outputFile = './swagger_output.json'; //Output file for Swagger documentation
