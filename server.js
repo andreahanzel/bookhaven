@@ -7,6 +7,7 @@ import { initDb } from './config/database.js';
 import bodyParser from 'body-parser';
 import router from './routes/index.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import cors from 'cors';
 
 import MongoStore from 'connect-mongo';
 
@@ -36,6 +37,26 @@ app.use(
     name: 'sessionId'
   })
 );
+
+// CORS configuration
+app.use(
+  cors({
+    origin: ['https://bookhaven-api-npvi.onrender.com'], // Only allow secure URLs
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+    credentials: true
+  })
+);
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://bookhaven-api-npvi.onrender.com'); // Force HTTPS
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, OPTIONS, DELETE');
+  next();
+});
 
 // Use router for all routes
 app.use('/', router);
