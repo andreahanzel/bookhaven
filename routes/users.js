@@ -55,7 +55,7 @@ const router = express.Router(); // Create a new router instance
  *                 type: string
  *               address:
  *                 type: string
- *               
+ *
  *     responses:
  *       201:
  *         description: User created successfully

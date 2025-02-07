@@ -4,7 +4,7 @@
 GET http://localhost:3000/books HTTP/1.1
 
 ### Get a single book by ID
-GET http://localhost:3000/books/67a1238597f9f01aac2a9e58 HTTP/1.1
+GET http://localhost:3000/books/ HTTP/1.1
 
 ### Create a new book
 POST http://localhost:3000/books/ HTTP/1.1
@@ -21,21 +21,21 @@ Content-Type: application/json
 }
 
 ### Update a book
-PUT http://localhost:3000/books/[id] HTTP/1.1 // Replace [id] with the actual book ID
+PUT http://localhost:3000/books/67a1235d97f9f01aac2a9e50
 Content-Type: application/json
 
 {
-  "bookId": "B0010", 
+  "bookId": "B0011", 
   "title": "1984 - Updated Edition",
   "author": "George Orwell",
   "genre": "Dystopian",
-  "price": 16.99,
+  "price": 14.99,
   "stock": 25,
   "publishedYear": 1949
 }
 
 ### Delete a book
-DELETE http://localhost:3000/books/[id] HTTP/1.1 // Replace [id] with the actual book ID
+DELETE http://localhost:3000/books/67a632eab55dc460778362bd
 
 ---
 

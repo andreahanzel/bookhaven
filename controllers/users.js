@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   },
   firstName: {
     type: String,
-    required: [true, 'Firts name is required']
+    required: [true, 'First name is required']
   },
   lastName: {
     type: String,
@@ -35,7 +35,6 @@ const userSchema = new mongoose.Schema({
   address: {
     type: String,
     required: [true, 'Address is required']
-
   }
 });
 

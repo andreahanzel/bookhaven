@@ -1,4 +1,4 @@
-import { body, validationResult } from 'express-validator'; 
+import { body, validationResult } from 'express-validator';
 
 // Validation rules for books
 const bookValidationRules = () => [
@@ -72,37 +72,36 @@ const userValidationRules = () => [
     .isString()
     .withMessage('Last name must be a string'),
 
-    body('email')
+  body('email')
     .notEmpty()
     .withMessage('Email is required')
     .isString()
     .withMessage('Email must be a string'),
 
-    body('password')
+  body('password')
     .notEmpty()
     .withMessage('Password is required')
     .isString()
     .withMessage('Password must be a string'),
 
-    body('role')
+  body('role')
     .notEmpty()
     .withMessage('Role is required')
     .isString()
     .withMessage('Role must be a string'),
 
-    body('createdAt')
+  body('createdAt')
     .notEmpty()
     .withMessage('Creation date is required')
     .isString()
     .withMessage('Creation must be a string'),
 
-    body('address')
+  body('address')
     .notEmpty()
     .withMessage('Address is required')
     .isString()
     .withMessage('Address must be a string')
 ]; // Validation rules for users
-
 
 const validate = (req, res, next) => {
   const errors = validationResult(req);
