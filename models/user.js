@@ -27,23 +27,23 @@ const userSchema = new mongoose.Schema(
       required: [true, 'Password is required']
     },
     role: {
-        type: Number,
-        required: [true, 'Role is required']
-      },
+      type: Number,
+      required: [true, 'Role is required']
+    },
     createdAt: {
-    type: Number,
-    required: [true, 'Creation date is required']
+      type: Number,
+      required: [true, 'Creation date is required']
     },
     address: {
-        type: Number,
-        required: [true, 'Address date is required']
-        }
+      type: Number,
+      required: [true, 'Address date is required']
+    }
   },
   {
     timestamps: true
   }
 ); // Mongoose model for User
 
-const User = mongoose.model('User', userSchema); 
+const User = mongoose.model('User', userSchema);
 
 export default User; // Mongoose model for User

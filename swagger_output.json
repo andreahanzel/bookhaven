@@ -1,283 +1,230 @@
+
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "BookHaven API",
-    "description": "API for managing book store",
-    "version": "1.0.0"
-  },
-  "host": "bookhaven-api-npvi.onrender.com",
-  "basePath": "/",
-  "schemes": [
-    "https",
-    "http"
-  ],
-  "paths": {
-    "/": {
-      "get": {
-        "tags": [
-          "Hello World"
-        ],
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-  
+    "swagger": "2.0",
+    "info": {
+        "title": "BookHaven API",
+        "description": "API for managing books in the BookHaven store",
+        "version": "1.0.0"
     },
-    "/books/": {
-      "get": {
-        "tags": [
-          "Books"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
+    "host": "bookhaven-api-npvi.onrender.com",
+    "basePath": "/",
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/": {
+    "get": {
+        "tags": ["General"],
+        "description": "Welcome message for the BookHaven API",
+        "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
+            "200": {
+                "description": "OK",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                            "type": "string",
+                            "example": "Hello, This is the BookHaven API!"
+                        }
+                    }
+                }
+            },
+            "500": { "description": "Internal Server Error" }
         }
-      },
-      "post": {
-        "tags": [
-          "Books"
-        ],
-        "description": "",
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/books/{id}": {
-      "get": {
-        "tags": [
-          "Books"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Books"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Books"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/users/": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/users/{id}": {
-      "get": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Users"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
     }
-  }
+},
+        "/books": {
+            "get": {
+                "tags": ["Books"],
+                "description": "Retrieve all books",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            },
+            "post": {
+                "tags": ["Books"],
+                "description": "Create a new book",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "bookId": { "type": "string", "example": "B001" },
+                                "title": { "type": "string", "example": "The Great Gatsby" },
+                                "author": { "type": "string", "example": "F. Scott Fitzgerald" },
+                                "genre": { "type": "string", "example": "Fiction" },
+                                "price": { "type": "number", "example": 10.99 },
+                                "stock": { "type": "integer", "example": 25 },
+                                "publishedYear": { "type": "integer", "example": 1925 }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": { "description": "Book created successfully" },
+                    "400": { "description": "Bad Request - Invalid Input" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            }
+        },
+        "/books/{id}": {
+            "get": {
+                "tags": ["Books"],
+                "description": "Retrieve a book by ID",
+                "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "400": { "description": "Bad Request" },
+                    "404": { "description": "Book Not Found" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            },
+            "put": {
+                "tags": ["Books"],
+                "description": "Update a book by ID",
+                "parameters": [
+                    { "name": "id", "in": "path", "required": true, "type": "string" },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "bookId": { "type": "string", "example": "B001" },
+                                "title": { "type": "string", "example": "The Great Gatsby" },
+                                "author": { "type": "string", "example": "F. Scott Fitzgerald" },
+                                "genre": { "type": "string", "example": "Fiction" },
+                                "price": { "type": "number", "example": 10.99 },
+                                "stock": { "type": "integer", "example": 25 },
+                                "publishedYear": { "type": "integer", "example": 1925 }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": { "description": "Book updated successfully" },
+                    "400": { "description": "Bad Request" },
+                    "404": { "description": "Book Not Found" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            },
+            "delete": {
+                "tags": ["Books"],
+                "description": "Delete a book by ID",
+                "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+                "responses": {
+                    "200": { "description": "Book deleted successfully" },
+                    "400": { "description": "Bad Request" },
+                    "404": { "description": "Book Not Found" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": ["Users"],
+                "description": "Retrieve all users",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            },
+            "post": {
+                "tags": ["Users"],
+                "description": "Create a new user",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "userId": { "type": "string", "example": "U001" },
+                                "firstName": { "type": "string", "example": "John" },
+                                "lastName": { "type": "string", "example": "Doe" },
+                                "email": { "type": "string", "example": "johndoe@example.com" },
+                                "password": { "type": "string", "example": "hashedpassword123" },
+                                "role": { "type": "string", "example": "customer" },
+                                "createdAt": { "type": "string", "example": "2025-01-10" },
+                                "address": { "type": "string", "example": "123 Elm St, Springfield, IL" }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": { "description": "User created successfully" },
+                    "400": { "description": "Bad Request - Invalid Input" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": ["Users"],
+                "description": "Retrieve a user by ID",
+                "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+                "responses": {
+                    "200": { "description": "OK" },
+                    "400": { "description": "Bad Request" },
+                    "404": { "description": "User Not Found" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            },
+            "put": {
+                "tags": ["Users"],
+                "description": "Update a user by ID",
+                "parameters": [
+                    { "name": "id", "in": "path", "required": true, "type": "string" },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "userId": { "type": "string", "example": "U001" },
+                                "firstName": { "type": "string", "example": "John" },
+                                "lastName": { "type": "string", "example": "Doe" },
+                                "email": { "type": "string", "example": "johndoe@example.com" },
+                                "password": { "type": "string", "example": "hashedpassword123" },
+                                "role": { "type": "string", "example": "customer" },
+                                "createdAt": { "type": "string", "example": "2025-01-10" },
+                                "address": { "type": "string", "example": "123 Elm St, Springfield, IL" }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": { "description": "User updated successfully" },
+                    "400": { "description": "Bad Request" },
+                    "404": { "description": "User Not Found" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            },
+            "delete": {
+                "tags": ["Users"],
+                "description": "Delete a user by ID",
+                "parameters": [{ "name": "id", "in": "path", "required": true, "type": "string" }],
+                "responses": {
+                    "200": { "description": "User deleted successfully" },
+                    "400": { "description": "Bad Request" },
+                    "404": { "description": "User Not Found" },
+                    "500": { "description": "Internal Server Error" }
+                }
+            }
+        }
+    }
 }
+
+
+

@@ -12,8 +12,6 @@ const router = express.Router();
 router.use('/', swaggerRouter);
 // Mount the orders router at /orders
 // router.use('/orders', ordersRouter);
-// Mount the users router at /users
-// router.use('/users', usersRouter);
 // Mount the reviews router at /reviews
 // router.use('/reviews', reviewsRouter);
 
