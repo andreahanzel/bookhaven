@@ -8,7 +8,7 @@ const doc = {
     title: 'BookHaven API',
     description: 'API for managing book store'
   },
-  host: process.env.HOST || 'bookhaven-api-npvi.onrender.com',
+  host: process.env.HOST || 'localhost:3000',
   basePath: '/',
   schemes: ['http', 'https']
 }; //Swagger documentation configuration
