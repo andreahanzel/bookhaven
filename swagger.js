@@ -8,16 +8,13 @@ const doc = {
     title: 'BookHaven API',
     description: 'API for managing book store'
   },
-  host: process.env.HOST || 'localhost:3000',
+  host: process.env.HOST || 'bookhaven-api-npvi.onrender.com',
   basePath: '/',
   schemes: ['http', 'https']
 }; //Swagger documentation configuration
 
 const outputFile = './swagger_output.json'; //Output file for Swagger documentation
-const endpointsFiles = [
-  './routes/books.js', //Routes to be documented - Books
-  './routes/users.js' //Routes to be documented - Users
-];
+const endpointsFiles = ['./routes/books.js', './routes/users.js', './routes/index.js'];
 
 // Generate Swagger documentation
 swaggerAutogen()(outputFile, endpointsFiles, doc).then(async () => {

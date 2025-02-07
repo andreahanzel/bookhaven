@@ -38,25 +38,27 @@ app.use(
   })
 );
 
-// CORS configuration
+// CORS - Allow only Render
 app.use(
   cors({
-    origin: ['https://bookhaven-api-npvi.onrender.com'], // Updated with the our URL
-    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+    origin: ['https://bookhaven-api-npvi.onrender.com'], // Only allow Render domain
+    methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
   })
 );
 
+// Global Headers
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://bookhaven-api-npvi.onrender.com'); // Force HTTPS
+  res.setHeader('Access-Control-Allow-Origin', 'https://bookhaven-api-npvi.onrender.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization'
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, OPTIONS, DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
   next();
-}); // Middleware to force HTTPS
+});
 
 // Use router for all routes
 app.use('/', router);
