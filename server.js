@@ -41,14 +41,14 @@ app.use(
 // CORS configuration - ensure secure communication
 app.use(
   cors({
-    origin: ['https://bookhaven-api-pr-12.onrender.com'], // Update with the client URL
+    origin: ['https://bookhaven-api-npvi.onrender.com'], // Update with the client URL
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
     credentials: true
   })
 );
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://bookhaven-api-pr-12.onrender.com'); // Force HTTPS
+  res.setHeader('Access-Control-Allow-Origin', 'https://bookhaven-api-npvi.onrender.com'); // Force HTTPS
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader(
     'Access-Control-Allow-Headers',
