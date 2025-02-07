@@ -38,13 +38,25 @@ app.use(
   })
 );
 
+// CORS configuration - ensure secure communication
 app.use(
   cors({
-    origin: ['https://bookhaven-api-pr-12.onrender.com', 'http://localhost:3000'], // Allow frontend and local testing
-    methods: 'GET, POST, PUT, DELETE',
-    allowedHeaders: 'Content-Type, Authorization'
+    origin: ['https://bookhaven-api-pr-12.onrender.com'], // Update with the client URL
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+    credentials: true
   })
 );
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://bookhaven-api-pr-12.onrender.com'); // Force HTTPS
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Z-Key, Authorization'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, OPTIONS, DELETE');
+  next();
+});
 
 // Use router for all routes
 app.use('/', router);
