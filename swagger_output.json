@@ -5,7 +5,7 @@
     "description": "API for managing book store",
     "version": "1.0.0"
   },
-  "host": "bookhaven-r697.onrender.com",
+  "host": "bookhaven-api-npvi.onrender.com",
   "basePath": "/",
   "schemes": [
     "https",
