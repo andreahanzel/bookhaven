@@ -8,8 +8,8 @@
     "host": "bookhaven-api-npvi.onrender.com",
     "basePath": "/",
     "schemes": [
-        "http",
-        "https"
+        "https",
+        "http"
     ],
     "paths": {
         "/": {
@@ -224,3 +224,6 @@
         }
     }
 }
+
+
+
