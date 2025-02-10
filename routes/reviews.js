@@ -2,6 +2,7 @@ import express from 'express'; // Import express
 import reviewsController from '../controllers/reviews.js'; // Import the reviews controller
 import { reviewValidationRules, validate } from '../middleware/validation.js'; // Import validation rules and middleware
 import BaseError from '../helpers/baseError.js'; // Import BaseError for error handling
+import { isAuthenticated } from '../middleware/authenticate.js';
 
 const router = express.Router(); // Create a new router instance
 
@@ -19,10 +20,12 @@ const router = express.Router(); // Create a new router instance
  *       500:
  *         description: Internal Server Error
  *   post:
+ *   security:
+ *    - github: []
  *     tags:
  *       - Reviews
- *     summary: Create a new review
- *     description: Add a new review to the database.
+ *     summary: Create a new review (requires authentication)
+ *     description: Add a new review to the database. Required Github authentication.
  *     requestBody:
  *       required: true
  *       content:
@@ -51,11 +54,19 @@ const router = express.Router(); // Create a new router instance
  *         description: Review created successfully
  *       400:
  *         description: Bad request - validation failed
+ *      401:
+ *        description: Unauthorized - authentication required
  *       500:
  *         description: Internal Server Error
  */
 router.get('/', reviewsController.getAllReviews);
-router.post('/', reviewValidationRules(), validate, reviewsController.createReview);
+router.post(
+  '/',
+  isAuthenticated,
+  reviewValidationRules(),
+  validate,
+  reviewsController.createReview
+);
 
 /**
  * @swagger
@@ -82,10 +93,12 @@ router.post('/', reviewValidationRules(), validate, reviewsController.createRevi
  *       500:
  *         description: Internal Server Error
  *   put:
+ *    security:
+ *      - github: []
  *     tags:
  *       - Review
- *     summary: Update a review by ID
- *     description: Update a review's information using its unique ID.
+ *     summary: Update a review by ID (requires authentication)
+ *     description: Update a review's information using its unique ID. Required Github authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -115,15 +128,19 @@ router.post('/', reviewValidationRules(), validate, reviewsController.createRevi
  *         description: Review updated successfully
  *       400:
  *         description: Invalid ID format
+ *       401:
+ *        description: Unauthorized - authentication required
  *       404:
  *         description: Review not found
  *       500:
  *         description: Internal Server Error
  *   delete:
+ *    security:
+ *      - github: []
  *     tags:
  *       - Reviews
- *     summary: Delete a review by ID
- *     description: Delete a review using its unique ID.
+ *     summary: Delete a review by ID (requires authentication)
+ *     description: Delete a review using its unique ID. Required Github authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -136,6 +153,8 @@ router.post('/', reviewValidationRules(), validate, reviewsController.createRevi
  *         description: Review deleted successfully
  *       400:
  *         description: Invalid ID format
+ *       401:
+ *        description: Unauthorized - authentication required
  *       404:
  *         description: Review not found
  *       500:
@@ -152,7 +171,13 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', reviewValidationRules(), validate, reviewsController.updateReview);
-router.delete('/:id', reviewsController.deleteReview);
+router.put(
+  '/:id',
+  isAuthenticated,
+  reviewValidationRules(),
+  validate,
+  reviewsController.updateReview
+);
+router.delete('/:id', isAuthenticated, reviewsController.deleteReview);
 
 export default router;

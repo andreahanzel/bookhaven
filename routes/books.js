@@ -2,6 +2,7 @@ import express from 'express'; // Import express
 import booksController from '../controllers/books.js'; // Import the books controller
 import { bookValidationRules, validate } from '../middleware/validation.js'; // Import validation rules and middleware
 import BaseError from '../helpers/baseError.js'; // Import BaseError for error handling
+import { isAuthenticated } from '../middleware/authenticate.js';
 
 const router = express.Router(); // Create a new router instance
 
@@ -19,10 +20,12 @@ const router = express.Router(); // Create a new router instance
  *       500:
  *         description: Internal Server Error
  *   post:
+ *    security:
+ *      - github: []
  *     tags:
  *       - Books
- *     summary: Create a new book
- *     description: Add a new book to the database.
+ *     summary: Create a new book (requires authentication)
+ *     description: Add a new book to the database. Required Github authentication.
  *     requestBody:
  *       required: true
  *       content:
@@ -59,9 +62,10 @@ const router = express.Router(); // Create a new router instance
  *         description: Bad request - validation failed
  *       500:
  *         description: Internal Server Error
+ *       401: Authentication required
  */
 router.get('/', booksController.getAllBooks);
-router.post('/', bookValidationRules(), validate, booksController.createBook);
+router.post('/', isAuthenticated, bookValidationRules(), validate, booksController.createBook);
 
 /**
  * @swagger
@@ -88,10 +92,12 @@ router.post('/', bookValidationRules(), validate, booksController.createBook);
  *       500:
  *         description: Internal Server Error
  *   put:
+ *    security:
+ *     - github: []
  *     tags:
  *       - Books
- *     summary: Update a book by ID
- *     description: Update a book's information using its unique ID.
+ *     summary: Update a book by ID (requires authentication)
+ *     description: Update a book's information using its unique ID. Required Github authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -129,11 +135,14 @@ router.post('/', bookValidationRules(), validate, booksController.createBook);
  *         description: Book not found
  *       500:
  *         description: Internal Server Error
+ *       401: Authentication required
  *   delete:
+ *    security:
+ *      - github: []
  *     tags:
  *       - Books
- *     summary: Delete a book by ID
- *     description: Delete a book using its unique ID.
+ *     summary: Delete a book by ID (requires authentication)
+ *     description: Delete a book using its unique ID. Required Github authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -144,6 +153,7 @@ router.post('/', bookValidationRules(), validate, booksController.createBook);
  *     responses:
  *       204:
  *         description: Book deleted successfully
+ *       401: Authentication required
  *       400:
  *         description: Invalid ID format
  *       404:
@@ -162,7 +172,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', bookValidationRules(), validate, booksController.updateBook);
-router.delete('/:id', booksController.deleteBook);
+router.put('/:id', isAuthenticated, bookValidationRules(), validate, booksController.updateBook);
+router.delete('/:id', isAuthenticated, booksController.deleteBook);
 
 export default router;

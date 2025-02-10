@@ -13,26 +13,26 @@ const orderSchema = new mongoose.Schema(
       trim: true
     },
     quantity: {
-        type: Number,
-        required: [true, 'Quantity is required'],
-        min: [0, 'Quantity cannot be negative']
-      },
+      type: Number,
+      required: [true, 'Quantity is required'],
+      min: [0, 'Quantity cannot be negative']
+    },
     totalPrice: {
-    type: Number,
-    required: [true, 'totalPrice is required'],
-    min: [0, 'totalPrice cannot be negative']
+      type: Number,
+      required: [true, 'totalPrice is required'],
+      min: [0, 'totalPrice cannot be negative']
     },
     orderDate: {
       type: Number,
       required: [true, 'Order date is required']
     },
     status: {
-        type: Number,
-        required: [true, 'Status is required']
-      },
+      type: Number,
+      required: [true, 'Status is required']
+    },
     shippingAddress: {
-    type: Number,
-    required: [true, 'Shioping address is required']
+      type: Number,
+      required: [true, 'Shipping address is required']
     }
   },
   {

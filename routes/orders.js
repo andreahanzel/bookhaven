@@ -2,6 +2,7 @@ import express from 'express'; // Import express
 import ordersController from '../controllers/orders.js'; // Import the orders controller
 import { orderValidationRules, validate } from '../middleware/validation.js'; // Import validation rules and middleware
 import BaseError from '../helpers/baseError.js'; // Import BaseError for error handling
+import { isAuthenticated } from '../middleware/authenticate.js';
 
 const router = express.Router(); // Create a new router instance
 
@@ -19,10 +20,12 @@ const router = express.Router(); // Create a new router instance
  *       500:
  *         description: Internal Server Error
  *   post:
+ *    security:
+ *    - Github: []
  *     tags:
  *       - Orders
- *     summary: Create a new order
- *     description: Add a new order to the database.
+ *     summary: Create a new order (requires authentication)
+ *     description: Add a new order to the database. Required Github authentication.
  *     requestBody:
  *       required: true
  *       content:
@@ -55,13 +58,15 @@ const router = express.Router(); // Create a new router instance
  *     responses:
  *       201:
  *         description: Order created successfully
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       400:
  *         description: Bad request - validation failed
  *       500:
  *         description: Internal Server Error
  */
 router.get('/', ordersController.getAllOrders);
-router.post('/', orderValidationRules(), validate, ordersController.createOrder);
+router.post('/', isAuthenticated, orderValidationRules(), validate, ordersController.createOrder);
 
 /**
  * @swagger
@@ -88,10 +93,12 @@ router.post('/', orderValidationRules(), validate, ordersController.createOrder)
  *       500:
  *         description: Internal Server Error
  *   put:
+ *    security:
+ *     - Github: []
  *     tags:
  *       - Orders
- *     summary: Update a order by ID
- *     description: Update a order's information using its unique ID.
+ *     summary: Update a order by ID (requires authentication)
+ *     description: Update a order's information using its unique ID. Required Github authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -129,11 +136,15 @@ router.post('/', orderValidationRules(), validate, ordersController.createOrder)
  *         description: Order not found
  *       500:
  *         description: Internal Server Error
+ *       401:
+ *         description: Unauthorized - Authentication required
  *   delete:
+ *    security:
+ *     - Github: []
  *     tags:
  *       - Orders
- *     summary: Delete an order by ID
- *     description: Delete an order using its unique ID.
+ *     summary: Delete an order by ID (requires authentication)
+ *     description: Delete an order using its unique ID. Required Github authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -144,6 +155,8 @@ router.post('/', orderValidationRules(), validate, ordersController.createOrder)
  *     responses:
  *       204:
  *         description: Order deleted successfully
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       400:
  *         description: Invalid ID format
  *       404:
@@ -162,7 +175,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', orderValidationRules(), validate, ordersController.updateOrder);
-router.delete('/:id', ordersController.deleteOrder);
+router.put('/:id', isAuthenticated, orderValidationRules(), validate, ordersController.updateOrder);
+router.delete('/:id', isAuthenticated, ordersController.deleteOrder);
 
 export default router;

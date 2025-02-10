@@ -119,13 +119,13 @@ const orderValidationRules = () => [
     .isString()
     .withMessage('Book ID must be a string'),
 
-    body('quantity')
+  body('quantity')
     .notEmpty()
     .withMessage('Quantity is required')
     .isInt({ min: 0 })
     .withMessage('Quantity must be a non-negative integer'),
 
-    body('totalPrice')
+  body('totalPrice')
     .notEmpty()
     .withMessage('Total Price is required')
     .isFloat({ gt: 0 })
@@ -147,7 +147,7 @@ const orderValidationRules = () => [
     .notEmpty()
     .withMessage('Shipping address is required')
     .isString()
-    .withMessage('Shipping address be a string'),
+    .withMessage('Shipping address be a string')
 ]; // Validation rules for orders
 
 // Validation rules for reviews
@@ -166,7 +166,7 @@ const reviewValidationRules = () => [
     .isString()
     .withMessage('Book ID must be a string'),
 
-    body('rating')
+  body('rating')
     .notEmpty()
     .withMessage('Rating is required')
     .isInt({ min: 0 })
@@ -182,7 +182,7 @@ const reviewValidationRules = () => [
     .notEmpty()
     .withMessage('Review date is required')
     .isString()
-    .withMessage('Review date must be a string'),
+    .withMessage('Review date must be a string')
 ]; // Validation rules for reviews
 
 const validate = (req, res, next) => {
@@ -201,4 +201,10 @@ const validate = (req, res, next) => {
   });
 }; // Middleware to validate request data
 
-export { bookValidationRules, userValidationRules, orderValidationRules, reviewValidationRules, validate }; // Export validation rules and middleware
+export {
+  bookValidationRules,
+  userValidationRules,
+  orderValidationRules,
+  reviewValidationRules,
+  validate
+}; // Export validation rules and middleware

@@ -2,6 +2,7 @@ import express from 'express'; // Import express
 import usersController from '../controllers/users.js'; // Import the users controller
 import { userValidationRules, validate } from '../middleware/validation.js'; // Import validation rules and middleware
 import BaseError from '../helpers/baseError.js'; // Import BaseError for error handling
+import { isAuthenticated } from '../middleware/authenticate.js';
 
 const router = express.Router(); // Create a new router instance
 
@@ -19,10 +20,12 @@ const router = express.Router(); // Create a new router instance
  *       500:
  *         description: Internal Server Error
  *   post:
+ *    security:
+ *      - github: []
  *     tags:
  *       - Users
- *     summary: Create a new user
- *     description: Add a new user to the database.
+ *     summary: Create a new user (requires authentication)
+ *     description: Add a new user to the database. Required Github authentication.
  *     requestBody:
  *       required: true
  *       content:
@@ -61,11 +64,13 @@ const router = express.Router(); // Create a new router instance
  *         description: User created successfully
  *       400:
  *         description: Bad request - validation failed
+ *       401:
+ *        description: Unauthorized - Authentication required
  *       500:
  *         description: Internal Server Error
  */
 router.get('/', usersController.getAllUsers);
-router.post('/', userValidationRules(), validate, usersController.createUser);
+router.post('/', isAuthenticated, userValidationRules(), validate, usersController.createUser);
 
 /**
  * @swagger
@@ -92,10 +97,12 @@ router.post('/', userValidationRules(), validate, usersController.createUser);
  *       500:
  *         description: Internal Server Error
  *   put:
+ *     security:
+ *       - github: []
  *     tags:
  *       - Users
- *     summary: Update a user by ID
- *     description: Update a user's information using its unique ID.
+ *     summary: Update a user by ID (requires authentication)
+ *     description: Update a user's information using its unique ID. Required Github authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -131,15 +138,19 @@ router.post('/', userValidationRules(), validate, usersController.createUser);
  *         description: User updated successfully
  *       400:
  *         description: Invalid ID format
+ *        401:
+ *        description: Unauthorized - Authentication required
  *       404:
  *         description: User not found
  *       500:
  *         description: Internal Server Error
  *   delete:
+ *    security:
+ * *     - github: []
  *     tags:
  *       - Users
- *     summary: Delete a user by ID
- *     description: Delete a user using its unique ID.
+ *     summary: Delete a user by ID (requires authentication)
+ *     description: Delete a user using its unique ID. Required Github authentication.
  *     parameters:
  *       - in: path
  *         name: id
@@ -152,6 +163,8 @@ router.post('/', userValidationRules(), validate, usersController.createUser);
  *         description: User deleted successfully
  *       400:
  *         description: Invalid ID format
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       404:
  *         description: User not found
  *       500:
@@ -168,7 +181,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.put('/:id', userValidationRules(), validate, usersController.updateUser);
-router.delete('/:id', usersController.deleteUser);
+router.put('/:id', isAuthenticated, userValidationRules(), validate, usersController.updateUser);
+router.delete('/:id', isAuthenticated, usersController.deleteUser);
 
 export default router;

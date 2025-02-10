@@ -8,6 +8,8 @@ import bodyParser from 'body-parser';
 import router from './routes/index.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import cors from 'cors';
+import passport from 'passport';
+import { Strategy as GitHubStrategy } from 'passport-github2';
 
 import MongoStore from 'connect-mongo';
 
@@ -58,6 +60,136 @@ app.use((req, res, next) => {
   );
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
   next();
+});
+
+// GitHub strategy configuration
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL:
+        process.env.CALLBACK_URL || 'https://bookhaven-api-npvi.onrender.com/github/callback'
+    },
+    async function (accessToken, refreshToken, profile, done) {
+      try {
+        if (!profile || !profile.id) {
+          console.error('GitHub authentication failed: No profile received.');
+          return done(null, false, { message: 'GitHub authentication failed' });
+        }
+
+        console.log('GitHub OAuth callback received:', {
+          profileId: profile.id,
+          username: profile.username,
+          displayName: profile.displayName
+        });
+
+        // Create user object
+        const user = {
+          id: profile.id,
+          username: profile.username,
+          displayName: profile.displayName || profile.username,
+          provider: 'github'
+        };
+
+        return done(null, user);
+      } catch (error) {
+        console.error('Error in GitHub OAuth callback:', error);
+        return done(error);
+      }
+    }
+  )
+);
+
+// Serialize user to store in session
+passport.serializeUser((user, done) => {
+  console.log('Serializing user:', user);
+  done(null, user);
+});
+
+// Deserialize user when retrieving session
+passport.deserializeUser((user, done) => {
+  console.log('Deserializing user:', user);
+  done(null, user);
+});
+
+// Debug middleware
+app.use((req, res, next) => {
+  console.log('Session:', {
+    isAuthenticated: req.isAuthenticated?.(),
+    sessionID: req.sessionID,
+    user: req.user?.username
+  });
+  next();
+});
+
+// Debug route
+app.get('/debug-session', (req, res) => {
+  res.json({
+    isAuthenticated: req.isAuthenticated(),
+    user: req.user,
+    session: req.session
+  });
+});
+
+// Root route
+app.get('/', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.send(`Logged in as ${req.user.username || req.user.displayName}`);
+  } else {
+    res.send('Logged out');
+  }
+});
+
+// Auth status route
+app.get('/auth/status', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({
+      authenticated: true,
+      user: req.user
+    });
+  } else {
+    res.json({
+      authenticated: false
+    });
+  }
+});
+
+// GitHub callback route
+app.get(
+  '/github/callback',
+  (req, res, next) => {
+    console.log('Entering callback route');
+    next();
+  },
+  passport.authenticate('github', {
+    failureRedirect: '/api-docs',
+    session: true
+  }),
+  (req, res) => {
+    console.log('Authentication successful', {
+      user: req.user?.username
+    });
+    res.redirect('/');
+  }
+);
+
+// Logout route
+app.get('/logout', (req, res, next) => {
+  console.log('Logging out user:', req.user?.username);
+  req.logout((err) => {
+    if (err) {
+      console.error('Logout error:', err);
+      return next(err);
+    }
+    req.session.destroy((err) => {
+      if (err) {
+        console.error('Session destruction error:', err);
+        return next(err);
+      }
+      res.redirect('/');
+    });
+  });
 });
 
 // Use router for all routes
