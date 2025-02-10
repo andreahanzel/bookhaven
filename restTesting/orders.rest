@@ -1,0 +1,53 @@
+### 📦 Orders API Tests
+
+### Get all orders
+GET http://localhost:3000/orders HTTP/1.1
+
+### Get a single order by ID
+GET http://localhost:3000/orders/67a1239897f9f01aac2a9e60 HTTP/1.1
+
+### Create a new order
+POST http://localhost:3000/orders/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "U002",
+  "bookId": "B002",
+  "quantity": 1,
+  "totalPrice": 15.99,
+  "orderDate": "2025-02-06",
+  "status": "Shipped",
+  "shippingAddress": "456 Oak St, Springfield, IL"
+}
+
+### Update an order
+PUT http://localhost:3000/orders/[id] HTTP/1.1 // Replace [id] with the actual order ID
+Content-Type: application/json
+
+{
+  "userId": "U002",
+  "bookId": "B002",
+  "quantity": 2,
+  "totalPrice": 31.98,
+  "orderDate": "2025-02-06",
+  "status": "Delivered",
+  "shippingAddress": "456 Oak St, Springfield, IL"
+}
+
+### Delete an order
+DELETE http://localhost:3000/orders/[id] HTTP/1.1 // Replace [id] with the actual order ID
+
+---
+
+### 🚨 Error Test Cases
+
+### Test Error: Get order with invalid ID format
+GET http://localhost:3000/orders/123 HTTP/1.1
+
+### Test Error: Create order with missing required fields
+POST http://localhost:3000/orders/ HTTP/1.1
+Content-Type: application/json
+
+{
+  "userId": "U002"
+}
