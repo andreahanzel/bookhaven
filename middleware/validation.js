@@ -49,7 +49,7 @@ const bookValidationRules = () => [
     .withMessage('Published year must be a non-negative integer')
 ]; // Validation rules for books
 
-//// Validation rules for users
+// Validation rules for users
 const userValidationRules = () => [
   body('userId')
     .trim()
@@ -103,6 +103,53 @@ const userValidationRules = () => [
     .withMessage('Address must be a string')
 ]; // Validation rules for users
 
+// Validation rules for orders
+const orderValidationRules = () => [
+  body('userId')
+    .trim()
+    .notEmpty()
+    .withMessage('User ID is required')
+    .isString()
+    .withMessage('User ID must be a string'),
+
+  body('bookId')
+    .trim()
+    .notEmpty()
+    .withMessage('Book ID is required')
+    .isString()
+    .withMessage('Book ID must be a string'),
+
+    body('quantity')
+    .notEmpty()
+    .withMessage('Quantity is required')
+    .isInt({ min: 0 })
+    .withMessage('Quantity must be a non-negative integer'),
+
+    body('totalPrice')
+    .notEmpty()
+    .withMessage('Total Price is required')
+    .isFloat({ gt: 0 })
+    .withMessage('Total Price must be a positive number'),
+
+  body('orderDate')
+    .notEmpty()
+    .withMessage('Order date is required')
+    .isString()
+    .withMessage('Order date must be a string'),
+
+  body('status')
+    .notEmpty()
+    .withMessage('Status is required')
+    .isString()
+    .withMessage('Status must be a string'),
+
+  body('shippingAddress')
+    .notEmpty()
+    .withMessage('Shipping address is required')
+    .isString()
+    .withMessage('Shipping address be a string'),
+]; // Validation rules for orders
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -119,4 +166,4 @@ const validate = (req, res, next) => {
   });
 }; // Middleware to validate request data
 
-export { bookValidationRules, userValidationRules, validate }; // Export validation rules and middleware
+export { bookValidationRules, userValidationRules, orderValidationRules, validate }; // Export validation rules and middleware
