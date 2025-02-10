@@ -146,7 +146,7 @@ router.post('/', isAuthenticated, userValidationRules(), validate, usersControll
  *         description: Internal Server Error
  *   delete:
  *    security:
- * *     - github: []
+ *       - github: []
  *     tags:
  *       - Users
  *     summary: Delete a user by ID (requires authentication)

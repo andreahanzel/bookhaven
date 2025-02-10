@@ -1,4 +1,4 @@
-import { body, validationResult } from 'express-validator';
+import { body, validationResult } from 'express-validator'; // Import validation functions from Express Validator
 
 // Validation rules for books
 const bookValidationRules = () => [

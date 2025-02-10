@@ -2,15 +2,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import session from 'express-session';
 import { initDb } from './config/database.js';
 import bodyParser from 'body-parser';
 import router from './routes/index.js';
 import { errorHandler } from './middleware/errorHandler.js';
-import cors from 'cors';
 import passport from 'passport';
+import session from 'express-session';
 import { Strategy as GitHubStrategy } from 'passport-github2';
-
+import cors from 'cors';
 import MongoStore from 'connect-mongo';
 
 const app = express();
@@ -39,6 +38,9 @@ app.use(
     name: 'sessionId'
   })
 );
+
+app.use(passport.initialize()); // Initialize passport middleware
+app.use(passport.session()); // Add passport middleware to express
 
 // CORS - Allow only Render
 app.use(

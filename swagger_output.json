@@ -255,7 +255,7 @@
     "post": {
         "security": [{ "githubAuth": [] }],
         "tags": ["Orders"],
-        "description": "Create a new order (requires authentication)",
+        "description": "Create a new order (authentication required)",
         "parameters": [
             {
                 "name": "body",
@@ -298,7 +298,7 @@
     "put": {
         "security": [{ "githubAuth": [] }],
         "tags": ["Orders"],
-        "description": "Update an order by ID (requires authentication)",
+        "description": "Update an order by ID (authentication required)",
         "parameters": [
             { "name": "id", "in": "path", "required": true, "type": "string" },
             {
@@ -354,7 +354,7 @@
     "post": {
         "security": [{ "githubAuth": [] }],
         "tags": ["Reviews"],
-        "description": "Create a new review (requires authentication)",
+        "description": "Create a new review (authentication required)",
         "parameters": [
             {
                 "name": "body",
@@ -395,7 +395,7 @@
     "put": {
         "security": [{ "githubAuth": [] }],
         "tags": ["Reviews"],
-        "description": "Update a review by ID (requires authentication)",
+        "description": "Update a review by ID (authentication required)",
         "parameters": [
             { "name": "id", "in": "path", "required": true, "type": "string" },
             {
