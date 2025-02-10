@@ -62,7 +62,8 @@ const router = express.Router(); // Create a new router instance
  *         description: Bad request - validation failed
  *       500:
  *         description: Internal Server Error
- *       401: Authentication required
+ *       401:
+ *         description: Unauthorized - Authentication required
  */
 router.get('/', booksController.getAllBooks);
 router.post('/', isAuthenticated, bookValidationRules(), validate, booksController.createBook);
@@ -129,13 +130,14 @@ router.post('/', isAuthenticated, bookValidationRules(), validate, booksControll
  *     responses:
  *       200:
  *         description: Book updated successfully
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       400:
  *         description: Invalid ID format
  *       404:
  *         description: Book not found
  *       500:
  *         description: Internal Server Error
- *       401: Authentication required
  *   delete:
  *    security:
  *      - github: []
@@ -153,7 +155,8 @@ router.post('/', isAuthenticated, bookValidationRules(), validate, booksControll
  *     responses:
  *       204:
  *         description: Book deleted successfully
- *       401: Authentication required
+ *       401:
+ *         description: Unauthorized - Authentication required
  *       400:
  *         description: Invalid ID format
  *       404:

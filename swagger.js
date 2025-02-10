@@ -1,6 +1,5 @@
 import swaggerAutogen from 'swagger-autogen'; //Swagger documentation generator
 import dotenv from 'dotenv'; //Load environment variables
-
 dotenv.config(); //Load environment variables
 
 const doc = {
@@ -8,7 +7,7 @@ const doc = {
     title: 'BookHaven API',
     description: 'API for managing book store'
   },
-  host: process.env.HOST || 'bookhaven-api-npvi.onrender.com',
+  host: process.env.HOST || 'localhost:3000',
   basePath: '/',
   schemes: ['https', 'http']
 }; //Swagger documentation configuration

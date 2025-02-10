@@ -21,7 +21,7 @@ export const errorHandler = (err, req, res, _next) => {
   }
 
   // For any other error, send 500
-  console.error('ERROR 💥', err);
+  console.error('ERROR', err);
   return res.status(500).json({
     status: 'error',
     statusCode: 500,
