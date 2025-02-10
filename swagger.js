@@ -15,6 +15,7 @@ const doc = {
 
 const outputFile = './swagger_output.json'; //Output file for Swagger documentation
 const endpointsFiles = [
+  './routes/reviews.js', //Routes to be documented - Reviews
   './routes/orders.js', //Routes to be documented - Orders
   './routes/books.js', //Routes to be documented - Books
   './routes/users.js', //Routes to be documented - Users

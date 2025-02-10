@@ -150,6 +150,41 @@ const orderValidationRules = () => [
     .withMessage('Shipping address be a string'),
 ]; // Validation rules for orders
 
+// Validation rules for reviews
+const reviewValidationRules = () => [
+  body('userId')
+    .trim()
+    .notEmpty()
+    .withMessage('User ID is required')
+    .isString()
+    .withMessage('User ID must be a string'),
+
+  body('bookId')
+    .trim()
+    .notEmpty()
+    .withMessage('Book ID is required')
+    .isString()
+    .withMessage('Book ID must be a string'),
+
+    body('rating')
+    .notEmpty()
+    .withMessage('Rating is required')
+    .isInt({ min: 0 })
+    .withMessage('Rating must be a non-negative integer'),
+
+  body('comment')
+    .notEmpty()
+    .withMessage('Comment is required')
+    .isString()
+    .withMessage('Comment must be a string'),
+
+  body('reviewDate')
+    .notEmpty()
+    .withMessage('Review date is required')
+    .isString()
+    .withMessage('Review date must be a string'),
+]; // Validation rules for reviews
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
@@ -166,4 +201,4 @@ const validate = (req, res, next) => {
   });
 }; // Middleware to validate request data
 
-export { bookValidationRules, userValidationRules, orderValidationRules, validate }; // Export validation rules and middleware
+export { bookValidationRules, userValidationRules, orderValidationRules, reviewValidationRules, validate }; // Export validation rules and middleware

@@ -2,7 +2,7 @@ import express from 'express'; // Main router for the application
 import ordersRouter from './orders.js'; // Router for order-related routes
 import usersRouter from './users.js'; // Router for user-related routes
 import booksRouter from './books.js'; // Router for order-related routes
-// import reviewsRouter from './reviews.js'; // Router for user-related routes
+import reviewsRouter from './reviews.js'; // Router for user-related routes
 import swaggerRouter from './swagger.js'; // Router for Swagger documentation
 // import passport from 'passport';
 
@@ -13,8 +13,7 @@ router.use('/', swaggerRouter);
 // Mount the orders router at /orders
 router.use('/orders', ordersRouter);
 // Mount the reviews router at /reviews
-// router.use('/reviews', reviewsRouter);
-
+router.use('/reviews', reviewsRouter);
 // Mount the books router at /books
 router.use('/books', booksRouter);
 // Mount the users router at /users
