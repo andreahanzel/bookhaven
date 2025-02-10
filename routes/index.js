@@ -4,7 +4,7 @@ import usersRouter from './users.js'; // Router for user-related routes
 import booksRouter from './books.js'; // Router for order-related routes
 import reviewsRouter from './reviews.js'; // Router for user-related routes
 import swaggerRouter from './swagger.js'; // Router for Swagger documentation
-// import passport from 'passport';
+import passport from 'passport';
 
 const router = express.Router();
 
@@ -20,7 +20,16 @@ router.use('/books', booksRouter);
 router.use('/users', usersRouter);
 
 // Add GitHub authentication routes
-// router.get('/login', passport.authenticate('github'), (req, res) => {});
+router.get('/login', passport.authenticate('github'), (_req, _res) => {});
+
+router.get('/logout', (req, res, next) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/');
+  });
+}); // Logout route
 
 // Add a root route for testing
 router.get('/', (req, res) => {
