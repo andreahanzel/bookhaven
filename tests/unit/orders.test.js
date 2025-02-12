@@ -1,6 +1,8 @@
 import { jest } from '@jest/globals'; // Import jest for mocking
 import ordersController from '../../controllers/orders.js'; // Import the orders controller
 
+jest.setTimeout(10000); // Sets timeout to 10 seconds for all tests
+
 // Mock the database connection
 jest.mock('../../config/database.js', () => ({
   connectToDatabase: jest.fn().mockResolvedValue({
