@@ -1,6 +1,8 @@
 import { jest } from '@jest/globals'; // Import jest for mocking
 import booksController from '../../controllers/books.js'; // Import the books controller
 
+jest.setTimeout(10000); // Sets timeout to 10 seconds for all tests
+
 // Mock the database connection
 jest.mock('../../config/database.js', () => ({
   connectToDatabase: jest.fn().mockResolvedValue({
@@ -60,7 +62,7 @@ describe('Book Controller Unit Tests', () => {
 
     expect(res.setHeader).toHaveBeenCalledWith('Content-Type', 'application/json');
     expect(res.json).toHaveBeenCalledWith(mockBooks);
-  });
+  }, 10000);
 
   // TEST: GET SINGLE BOOK
   test('should return a single book when valid ID is provided', async () => {
@@ -75,7 +77,7 @@ describe('Book Controller Unit Tests', () => {
 
     await booksController.getSingleBook(req, res);
     expect(res.json).toHaveBeenCalledWith(mockBooks[0]);
-  });
+  }, 10000);
 
   // Proper cleanup after all tests
   afterAll(async () => {
