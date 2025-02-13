@@ -18,7 +18,7 @@
     "nodejs",
     "bookstore"
   ],
-  "author": "Andrea Toreki, Elias Rodríguez, Shayla Foley, Dinis Mubai",
+  "author": "Andrea Toreki, Elias Rodríguez, Shayla Foley, Dinis Mubai, Nicholas Kwabena Amoako",
   "license": "ISC",
   "dependencies": {
     "connect-mongo": "^5.1.0",
@@ -39,13 +39,15 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.8",
+    "@babel/preset-env": "^7.26.8",
     "@eslint/js": "^9.19.0",
     "eslint": "^9.19.0",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^15.14.0",
-    "jest": "^29.7.0",
     "nodemon": "^3.1.9",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "supertest": "^7.0.0"
   }
 }

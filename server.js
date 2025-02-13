@@ -200,6 +200,9 @@ app.use('/', router);
 // Error handling middleware
 app.use(errorHandler);
 
+// TESTING: Added export the app for testing purposes
+export { app };
+
 initDb((err) => {
   if (err) {
     console.log(err);
